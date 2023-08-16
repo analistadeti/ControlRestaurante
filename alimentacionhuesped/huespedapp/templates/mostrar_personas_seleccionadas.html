@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Personas Seleccionadas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   {% include 'nav.html' %}
+<br>
+   <br>
+   <br>
+
+    <div class="container">
+        <h1></h1>
+      <form method="get" class="form-inline">
+    <div class="form-group mr-2">
+        <input type="date" name="fecha" class="form-control" placeholder="{{fecha_actual}}" value="{{ fecha_actual }}">
+    </div>
+    <button type="submit" class="btn btn-primary" style="background-color: #003166;">Filtrar</button>
+</form>
+        <br>
+        <div class="card mb-3" style="max-width: 18rem; background-color: #003166;">
+        <div class="card-body">
+            <p class="card-text" style="color: white;">Numero de pax: {{ contador }}</p>
+        </div>
+    </div>
+        <div class="table-responsive">
+         <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Habitación</th>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Alimentacion</th>
+                    <th>Plan</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for persona in personas_seleccionadas %}
+                <tr>
+                    <td>{{ persona.habitacion }}</td>
+                    <td>{{ persona.cedula }}</td>
+                    <td>{{ persona.nombre }}</td>
+                    <td>{{ persona.alimentacion }}</td>
+                    <td>{{ persona.nom_plan }}</td>
+                    <td>{{ persona.fecha_actual }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{%load static%}
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+     <div class="collapse navbar-collapse" id="navbarNav" style="background-color: #003166;">
+          <img src="{% static 'zuanablack.png' %}" alt="Mi Imagen" style="width:60px;height:auto">
+        <img src="{% static 'ZhBlanco.png' %}" alt="Mi Imagen" style="width:60px;height:auto">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mostrar_personas' %}" style="color:white">Alimentacion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mostrar_personas_seleccionadas' %}" style="color:white">Registrados </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+

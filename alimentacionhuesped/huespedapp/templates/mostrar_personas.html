@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Personas con Alimentación</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+  {% include 'nav.html' %}
+<br>
+  <br>
+  <br>
+    <div class="container">
+        <form method="get" action="{% url 'mostrar_personas' %}">
+            <label for="habitacion">Habitación:</label>
+            <input type="text" name="habitacion">
+            <button type="submit" class="btn btn-primary" style="background-color: #003166;">Filtrar</button>
+        </form>
+        <br>
+          <h6><span>Numero de pax que han pasado hasta el momento: {{ contador }}</span></h6>
+        <br>
+        {% if personas %}
+            <form method="post" action="{% url 'guardar_persona_seleccionada' %}">
+                {% csrf_token %}
+                <input type="hidden" name="habitacion" value="{{ numero_habitacion }}">
+                <button type="submit" class="btn btn-dark" style="background-color: #cca352;">Ingresar</button>
+                <br>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Habitación</th>
+                            <th>Cedula</th>
+                            <th>Nombre</th>
+                            <th>Alimentacion</th>
+                            <th>Plan</th>
+                            <th>Llegada</th>
+                            <th>Salida</th>
+                            <th>EDAD</th>
+                            <th>FECHA</th>
+                            <th>Seleccionar</th>
+                        </tr>
+                    </thead>
+             <tbody>
+    {% for persona in personas %}
+    <tr>
+        <td>{{ persona.HABITACION }}</td>
+        <td>{{ persona.CEDULA }}</td>
+        <td>{{ persona.NOMBRE }}</td>
+        <td>{{ persona.ALIMENTACION }}</td>
+        <td>{{ persona.NOM_PLAN }}</td>
+        <td>{{ persona.LLEGADA }}</td>
+        <td>{{ persona.SALIDA }}</td>
+        <td>{{ persona.EDAD }}</td>
+        <td>{{ persona.FECHA_ACTUAL }}</td>
+        <td>
+            <input type="checkbox" name="seleccionadas" value="{{ persona.CEDULA }}_{{ persona.ALIMENTACION }}" {% if persona.is_seleccionada %}checked{% endif %}>
+
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+                </table>
+            </form>
+        {% endif %}
+
+        {% if request.GET.habitacion and not personas %}
+            <script>
+                var habitacion = "{{ request.GET.habitacion }}";
+                alert( habitacion + " NO tiene alimentacion disponible");
+            </script>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
